@@ -1,0 +1,16 @@
+{
+  "tool": "Unicornscan",
+  "slug": "unicornscan",
+  "category": "Port scanner",
+  "fixture_mode": "single_lab_port_only",
+  "simple_test_scenario": "Use one explicitly selected lab IP and one TCP port with conservative settings if the component supports it.",
+  "safety_note": "No broad/high-rate scan.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

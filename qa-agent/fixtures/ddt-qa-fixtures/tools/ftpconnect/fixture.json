@@ -1,0 +1,16 @@
+{
+  "tool": "FTPconnect",
+  "slug": "ftpconnect",
+  "category": "FTP client",
+  "fixture_mode": "service_required",
+  "simple_test_scenario": "Use `127.0.0.1` only if the user has configured a local FTP fixture. No FTP daemon is bundled.",
+  "safety_note": "Do not connect to external FTP servers.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/local-services/README.md"
+  ]
+}

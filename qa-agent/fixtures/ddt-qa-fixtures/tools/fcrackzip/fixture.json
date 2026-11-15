@@ -1,0 +1,16 @@
+{
+  "tool": "Fcrackzip",
+  "slug": "fcrackzip",
+  "category": "ZIP password recovery",
+  "fixture_mode": "offline_file_only",
+  "simple_test_scenario": "Use `common/archive/ddt-password-protected.zip`; fixture password is documented in `PASSWORD.txt`.",
+  "safety_note": "Only the supplied synthetic archive; do not target user archives.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/archive/ddt-password-protected.zip"
+  ]
+}

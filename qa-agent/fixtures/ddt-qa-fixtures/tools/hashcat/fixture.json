@@ -1,0 +1,17 @@
+{
+  "tool": "Hashcat",
+  "slug": "hashcat",
+  "category": "Offline hash testing",
+  "fixture_mode": "offline_file_only",
+  "simple_test_scenario": "Use `common/hashes/md5-test-only.txt` with `common/wordlists/tiny-fixture-words.txt`; MD5 mode 0.",
+  "safety_note": "Only synthetic fixture hash.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/hashes/md5-test-only.txt",
+    "common/wordlists/tiny-fixture-words.txt"
+  ]
+}

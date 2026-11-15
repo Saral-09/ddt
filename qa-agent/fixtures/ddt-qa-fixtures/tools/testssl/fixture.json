@@ -1,0 +1,17 @@
+{
+  "tool": "Testssl",
+  "slug": "testssl",
+  "category": "TLS configuration test",
+  "fixture_mode": "local_tls_only",
+  "simple_test_scenario": "Start `common/tls/server.py` and test `127.0.0.1:18443`. The certificate is self-signed.",
+  "safety_note": "Loopback-only; certificate key is test-only.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/tls/localhost-cert.pem",
+    "common/tls/localhost-key.pem"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "tool": "Nuclei",
+  "slug": "nuclei",
+  "category": "Template-based checks",
+  "fixture_mode": "local_web_only",
+  "simple_test_scenario": "Use `http://127.0.0.1:18080` with `common/nuclei/ddt-local-health.yaml`.",
+  "safety_note": "Supplied template performs one benign GET to /health.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/nuclei/ddt-local-health.yaml"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "tool": "SMB-Ghost Scanner",
+  "slug": "smb-ghost-scanner",
+  "category": "SMB vulnerability detection",
+  "fixture_mode": "single_lab_host",
+  "simple_test_scenario": "Use the internal lab Windows host `10.10.1.201` only when explicitly authorised.",
+  "safety_note": "Detection only; never exploit.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

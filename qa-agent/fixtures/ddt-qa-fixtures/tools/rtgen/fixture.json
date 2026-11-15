@@ -1,0 +1,16 @@
+{
+  "tool": "Rtgen",
+  "slug": "rtgen",
+  "category": "Rainbow table generation",
+  "fixture_mode": "disposable_local_generation",
+  "simple_test_scenario": "Use `common/rainbowcrack/generate-disposable-table.sh` manually to generate a tiny table.",
+  "safety_note": "Writes generated table files; run only in the isolated fixture directory.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/rainbowcrack/generate-disposable-table.sh"
+  ]
+}

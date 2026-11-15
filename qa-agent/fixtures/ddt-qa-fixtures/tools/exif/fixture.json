@@ -1,0 +1,16 @@
+{
+  "tool": "Exif",
+  "slug": "exif",
+  "category": "Image metadata extraction",
+  "fixture_mode": "offline_file",
+  "simple_test_scenario": "Select `common/images/ddt-exif-sample.jpg`.",
+  "safety_note": "Synthetic EXIF metadata only.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/images/ddt-exif-sample.jpg"
+  ]
+}

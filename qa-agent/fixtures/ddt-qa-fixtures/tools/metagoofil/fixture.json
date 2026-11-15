@@ -1,0 +1,17 @@
+{
+  "tool": "Metagoofil",
+  "slug": "metagoofil",
+  "category": "Document metadata collection",
+  "fixture_mode": "offline_or_local_docs",
+  "simple_test_scenario": "Use the included DOCX/PDF files for metadata inspection; remote harvesting is not part of this fixture.",
+  "safety_note": "No internet document harvesting.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/documents/ddt-sample-report.docx",
+    "common/documents/ddt-sample-report.pdf"
+  ]
+}

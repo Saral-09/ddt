@@ -1,0 +1,16 @@
+{
+  "tool": "Wifite2",
+  "slug": "wifite2",
+  "category": "Wireless auditing",
+  "fixture_mode": "hardware_required",
+  "simple_test_scenario": "Help and UI validation only. Requires a dedicated authorised wireless lab and adapter.",
+  "safety_note": "No wireless attacks or handshake capture.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

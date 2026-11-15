@@ -1,0 +1,16 @@
+{
+  "tool": "Urlsnarf",
+  "slug": "urlsnarf",
+  "category": "HTTP traffic capture",
+  "fixture_mode": "manual_capture_only",
+  "simple_test_scenario": "Use the supplied PCAP only if the component supports offline input; otherwise generate local HTTP traffic and capture loopback manually.",
+  "safety_note": "Live capture requires explicit interface approval.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/pcap/ddt-synthetic-http.pcap"
+  ]
+}

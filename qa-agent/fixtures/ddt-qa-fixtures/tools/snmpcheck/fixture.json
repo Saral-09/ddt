@@ -1,0 +1,16 @@
+{
+  "tool": "SnmpCheck",
+  "slug": "snmpcheck",
+  "category": "SNMP enumeration",
+  "fixture_mode": "single_lab_service",
+  "simple_test_scenario": "Use one explicitly selected lab host and UDP/161 only if SNMP is configured.",
+  "safety_note": "No community-string guessing.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

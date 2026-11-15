@@ -1,0 +1,5 @@
+# User-provided lab targets. Select only one explicitly for each test.
+192.168.1.201  # PC2 external-side address
+10.10.1.201    # PC2 internal-side address
+10.10.1.200    # DDT.com Active Directory server
+# EXCLUDED attacker: 10.10.1.202

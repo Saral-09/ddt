@@ -1,0 +1,16 @@
+{
+  "tool": "The Harvester",
+  "slug": "the-harvester",
+  "category": "OSINT collection",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "Use `ddt.test` for form validation. Real providers require explicit scope and possibly API keys.",
+  "safety_note": "No internet harvesting.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/wordlists/subdomains-test.txt"
+  ]
+}

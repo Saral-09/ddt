@@ -1,0 +1,16 @@
+{
+  "tool": "Photon",
+  "slug": "photon",
+  "category": "Web crawler",
+  "fixture_mode": "local_web_only",
+  "simple_test_scenario": "Use `http://127.0.0.1:18080/` with shallow crawl limits.",
+  "safety_note": "Loopback only; limit depth.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/localhost-url.txt"
+  ]
+}

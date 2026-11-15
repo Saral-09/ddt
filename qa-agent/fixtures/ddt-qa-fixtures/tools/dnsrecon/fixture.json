@@ -1,0 +1,16 @@
+{
+  "tool": "DNSRecon",
+  "slug": "dnsrecon",
+  "category": "DNS reconnaissance",
+  "fixture_mode": "manual_local_dns",
+  "simple_test_scenario": "Use `ddt.test` with a lab resolver only if configured.",
+  "safety_note": "No zone transfer attempts against third parties.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/dns/example-zone.txt"
+  ]
+}

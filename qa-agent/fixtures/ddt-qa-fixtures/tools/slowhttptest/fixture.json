@@ -1,0 +1,16 @@
+{
+  "tool": "SlowHttpTest",
+  "slug": "slowhttptest",
+  "category": "Slow HTTP denial-of-service",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "UI validation and help-only checks.",
+  "safety_note": "No slow-connection or DoS execution.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/localhost-url.txt"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "tool": "Nmap",
+  "slug": "nmap",
+  "category": "Network scanner",
+  "fixture_mode": "single_lab_host",
+  "simple_test_scenario": "Use `192.168.1.201` and ports `21,80,135,139,445` when explicitly requested; previously observed open-port results are historical, not guaranteed.",
+  "safety_note": "One host and selected ports only.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "tool": "Foremost",
+  "slug": "foremost",
+  "category": "File carving",
+  "fixture_mode": "offline_file",
+  "simple_test_scenario": "Select `common/forensics/ddt-sample-disk.img`; expected embedded types include JPEG and ZIP.",
+  "safety_note": "Output to a new disposable directory.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/forensics/ddt-sample-disk.img"
+  ]
+}

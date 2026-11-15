@@ -1,0 +1,14 @@
+{
+  "tool": "Gyoithon",
+  "slug": "gyoithon",
+  "category": "AI web application pentesting",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "Use the local web fixture for form validation only; do not execute AI-driven exploitation.",
+  "safety_note": "No automated exploitation.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": []
+}

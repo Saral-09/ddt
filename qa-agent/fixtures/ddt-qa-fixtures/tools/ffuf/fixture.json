@@ -1,0 +1,17 @@
+{
+  "tool": "FFuf",
+  "slug": "ffuf",
+  "category": "Web content discovery",
+  "fixture_mode": "local_web_only",
+  "simple_test_scenario": "Use local web fixture and `common/wordlists/web-small.txt`; set a low request rate if supported.",
+  "safety_note": "Loopback only; small wordlist.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/wordlists/web-small.txt",
+    "common/targets/localhost-url.txt"
+  ]
+}

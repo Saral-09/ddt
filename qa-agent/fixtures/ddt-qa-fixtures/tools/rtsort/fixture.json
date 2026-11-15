@@ -1,0 +1,16 @@
+{
+  "tool": "Rtsort",
+  "slug": "rtsort",
+  "category": "Rainbow table sorting",
+  "fixture_mode": "disposable_local_file",
+  "simple_test_scenario": "Generate a tiny disposable `.rt` table first, then select only its output directory.",
+  "safety_note": "Sorting modifies files; never select a user\u2019s real rainbow-table directory.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/rainbowcrack/generate-disposable-table.sh"
+  ]
+}

@@ -1,0 +1,3 @@
+www.ddt.test
+api.ddt.test
+mail.ddt.test

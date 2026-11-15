@@ -1,0 +1,7 @@
+$ORIGIN ddt.test.
+$TTL 300
+@ IN SOA ns.ddt.test. hostmaster.ddt.test. ( 2026111201 3600 900 604800 300 )
+@ IN NS ns.ddt.test.
+ns IN A 127.0.0.1
+www IN A 127.0.0.1
+api IN A 127.0.0.1

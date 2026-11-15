@@ -1,0 +1,14 @@
+{
+  "tool": "dmitry",
+  "slug": "dmitry",
+  "category": "Information gathering",
+  "fixture_mode": "local_or_help_only",
+  "simple_test_scenario": "Use `127.0.0.1` for basic target validation; local DNS/WHOIS data may be unavailable.",
+  "safety_note": "Do not query third-party targets.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": []
+}

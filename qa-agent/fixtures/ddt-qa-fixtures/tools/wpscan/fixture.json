@@ -1,0 +1,14 @@
+{
+  "tool": "WPScan",
+  "slug": "wpscan",
+  "category": "WordPress scanner",
+  "fixture_mode": "requires_wordpress_fixture",
+  "simple_test_scenario": "Use form validation only until a disposable local WordPress instance is separately provided.",
+  "safety_note": "The bundled static site is not WordPress; no external target. ",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": []
+}

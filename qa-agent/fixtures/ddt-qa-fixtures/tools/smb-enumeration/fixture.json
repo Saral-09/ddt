@@ -1,0 +1,16 @@
+{
+  "tool": "SMB Enumeration",
+  "slug": "smb-enumeration",
+  "category": "SMB enumeration",
+  "fixture_mode": "single_lab_service",
+  "simple_test_scenario": "Use `10.10.1.201` only when explicitly requested and SMB is available.",
+  "safety_note": "Read-only enumeration; no credential guessing.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

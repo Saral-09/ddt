@@ -1,0 +1,16 @@
+{
+  "tool": "Shodan API tool",
+  "slug": "shodan-api-tool",
+  "category": "Shodan search",
+  "fixture_mode": "api_key_required",
+  "simple_test_scenario": "Use placeholder query text only. Requires the user\u2019s own API key before a real request.",
+  "safety_note": "No API key included; never store credentials in fixture files.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

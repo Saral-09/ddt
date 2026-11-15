@@ -1,0 +1,16 @@
+{
+  "tool": "Arping",
+  "slug": "arping",
+  "category": "ARP ping",
+  "fixture_mode": "single_lab_host",
+  "simple_test_scenario": "Use one explicitly selected same-LAN lab host, preferably `10.10.1.201`.",
+  "safety_note": "Single host only.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

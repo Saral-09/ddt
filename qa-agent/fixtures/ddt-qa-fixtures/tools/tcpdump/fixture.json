@@ -1,0 +1,16 @@
+{
+  "tool": "Tcpdump",
+  "slug": "tcpdump",
+  "category": "Packet capture analysis",
+  "fixture_mode": "offline_file",
+  "simple_test_scenario": "Read `common/pcap/ddt-synthetic-http.pcap` as an offline capture.",
+  "safety_note": "Do not start live capture by default.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/pcap/ddt-synthetic-http.pcap"
+  ]
+}

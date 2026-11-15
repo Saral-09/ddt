@@ -1,0 +1,5 @@
+{
+  "service": "ddt-fixture",
+  "environment": "test",
+  "token": "FAKE_TOKEN_NOT_VALID"
+}

@@ -1,0 +1,16 @@
+{
+  "tool": "Fping",
+  "slug": "fping",
+  "category": "Host reachability",
+  "fixture_mode": "single_lab_host",
+  "simple_test_scenario": "Ping one explicitly selected lab host once if the UI supports a count option; otherwise use loopback.",
+  "safety_note": "No subnet sweep.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

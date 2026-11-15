@@ -1,0 +1,16 @@
+{
+  "tool": "Netcat",
+  "slug": "netcat",
+  "category": "TCP client/server",
+  "fixture_mode": "loopback_service",
+  "simple_test_scenario": "Start `common/local-services/echo_server.py`, then connect to `127.0.0.1:18081` and send `DDT-QA`.",
+  "safety_note": "Loopback-only echo service.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/local-services/echo_server.py"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "tool": "Nikto",
+  "slug": "nikto",
+  "category": "Web server scanner",
+  "fixture_mode": "local_web_only",
+  "simple_test_scenario": "Use `http://127.0.0.1:18080/` only; keep tests low-intensity and expect a basic static server.",
+  "safety_note": "Local-only; no external web scanning.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/localhost-url.txt"
+  ]
+}

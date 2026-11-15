@@ -1,0 +1,16 @@
+{
+  "tool": "Parsero",
+  "slug": "parsero",
+  "category": "robots.txt analysis",
+  "fixture_mode": "local_web_only",
+  "simple_test_scenario": "Use `http://127.0.0.1:18080/robots.txt`.",
+  "safety_note": "Local fixture only.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/local-web/robots.txt"
+  ]
+}

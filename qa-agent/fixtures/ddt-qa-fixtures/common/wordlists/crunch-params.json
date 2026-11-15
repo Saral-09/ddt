@@ -1,0 +1,14 @@
+{
+  "charset": "ab",
+  "min_length": 1,
+  "max_length": 2,
+  "expected_lines": [
+    "a",
+    "b",
+    "aa",
+    "ab",
+    "ba",
+    "bb"
+  ],
+  "note": "Expected set for the conceptual 2-character test. Actual ordering depends on the generator and settings."
+}

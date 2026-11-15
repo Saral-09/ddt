@@ -1,0 +1,16 @@
+{
+  "tool": "Amass",
+  "slug": "amass",
+  "category": "Domain mapping",
+  "fixture_mode": "passive_scope_required",
+  "simple_test_scenario": "Use `ddt.test` as a placeholder for UI validation; live enumeration requires an explicitly authorised domain and network scope.",
+  "safety_note": "Do not run passive internet enumeration as a default fixture.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/wordlists/subdomains-test.txt"
+  ]
+}

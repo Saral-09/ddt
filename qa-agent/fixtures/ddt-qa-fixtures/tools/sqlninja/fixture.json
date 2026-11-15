@@ -1,0 +1,14 @@
+{
+  "tool": "Sqlninja",
+  "slug": "sqlninja",
+  "category": "SQL Server exploitation",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "Form validation and help-only checks. No SQL Server target is bundled.",
+  "safety_note": "No exploitation.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": []
+}

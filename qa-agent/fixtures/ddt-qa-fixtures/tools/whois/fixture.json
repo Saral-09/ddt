@@ -1,0 +1,16 @@
+{
+  "tool": "Whois",
+  "slug": "whois",
+  "category": "WHOIS lookup",
+  "fixture_mode": "manual_local_only",
+  "simple_test_scenario": "Use `ddt.test` for form validation; it is a reserved test domain and has no public registration record.",
+  "safety_note": "Do not query a third-party identity target.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/dns/dns-records.csv"
+  ]
+}

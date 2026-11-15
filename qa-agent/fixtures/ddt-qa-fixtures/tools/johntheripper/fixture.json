@@ -1,0 +1,17 @@
+{
+  "tool": "JohnTheRipper",
+  "slug": "johntheripper",
+  "category": "Offline password hash audit",
+  "fixture_mode": "offline_file_only",
+  "simple_test_scenario": "Use `common/hashes/md5-test-only.txt` and the tiny fixture wordlist.",
+  "safety_note": "Only the synthetic fixture hash.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/hashes/md5-test-only.txt",
+    "common/wordlists/tiny-fixture-words.txt"
+  ]
+}

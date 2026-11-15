@@ -1,0 +1,16 @@
+{
+  "tool": "Nbtscan",
+  "slug": "nbtscan",
+  "category": "NetBIOS discovery",
+  "fixture_mode": "single_lab_host",
+  "simple_test_scenario": "Use one explicitly selected internal lab Windows host, `10.10.1.201`.",
+  "safety_note": "Single host only.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

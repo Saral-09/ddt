@@ -1,0 +1,4 @@
+name,type,value
+localhost,A,127.0.0.1
+www.ddt.test,A,127.0.0.1
+api.ddt.test,A,127.0.0.1

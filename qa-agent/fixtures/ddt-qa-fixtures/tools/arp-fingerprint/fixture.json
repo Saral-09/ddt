@@ -1,0 +1,16 @@
+{
+  "tool": "ARP Fingerprint",
+  "slug": "arp-fingerprint",
+  "category": "ARP device fingerprinting",
+  "fixture_mode": "single_lab_host",
+  "simple_test_scenario": "Use `10.10.1.201` only when explicitly selected and on the same L2 segment.",
+  "safety_note": "Do not scan ranges.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

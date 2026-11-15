@@ -1,0 +1,16 @@
+{
+  "tool": "SearchSploit",
+  "slug": "searchsploit",
+  "category": "Exploit database search",
+  "fixture_mode": "offline_search_only",
+  "simple_test_scenario": "Search a harmless product string such as `OpenSSH` in the local Exploit-DB index. Do not execute exploit code.",
+  "safety_note": "Search only; no exploit execution.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/text/sample.txt"
+  ]
+}

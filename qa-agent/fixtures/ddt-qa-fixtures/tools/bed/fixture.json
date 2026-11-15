@@ -1,0 +1,16 @@
+{
+  "tool": "BED",
+  "slug": "bed",
+  "category": "Service fuzzing",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "Inspect help and validate a loopback-only form configuration without launching fuzzing.",
+  "safety_note": "Fuzzing can disrupt services; no live execution fixture.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/local-services/README.md"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "tool": "Sherlock",
+  "slug": "sherlock",
+  "category": "Username OSINT",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "UI validation with `ddt-qa-fixture-user` only; do not perform internet-wide account checks automatically.",
+  "safety_note": "No public account enumeration.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/wordlists/synthetic-usernames.txt"
+  ]
+}

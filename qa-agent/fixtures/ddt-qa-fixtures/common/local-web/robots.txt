@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /private-fixture/
+Allow: /health
+Sitemap: http://127.0.0.1:18080/sitemap.xml

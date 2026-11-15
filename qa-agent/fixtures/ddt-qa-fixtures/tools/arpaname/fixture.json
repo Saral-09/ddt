@@ -1,0 +1,16 @@
+{
+  "tool": "Arpaname",
+  "slug": "arpaname",
+  "category": "Reverse DNS lookup",
+  "fixture_mode": "lab_or_loopback",
+  "simple_test_scenario": "Use `127.0.0.1` for loopback validation or an explicitly selected lab IP from `lab-targets.json`.",
+  "safety_note": "DNS result depends on local resolver.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

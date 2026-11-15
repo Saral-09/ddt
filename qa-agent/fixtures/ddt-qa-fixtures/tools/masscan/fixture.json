@@ -1,0 +1,16 @@
+{
+  "tool": "Masscan",
+  "slug": "masscan",
+  "category": "High-speed port scanner",
+  "fixture_mode": "single_lab_port_only",
+  "simple_test_scenario": "If explicitly approved, scan one port on one lab IP at a very low rate.",
+  "safety_note": "Never use broad ranges or high rates.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

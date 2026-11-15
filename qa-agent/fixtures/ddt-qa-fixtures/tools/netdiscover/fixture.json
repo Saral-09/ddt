@@ -1,0 +1,16 @@
+{
+  "tool": "NetDiscover",
+  "slug": "netdiscover",
+  "category": "Network discovery",
+  "fixture_mode": "manual_single_host",
+  "simple_test_scenario": "Validate interface and target fields; actual ARP discovery requires a same-L2 lab and user-selected host.",
+  "safety_note": "No automatic network range sweep.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

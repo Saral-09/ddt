@@ -1,0 +1,16 @@
+{
+  "tool": "Subjack",
+  "slug": "subjack",
+  "category": "Subdomain takeover detection",
+  "fixture_mode": "manual_local_data",
+  "simple_test_scenario": "Use `common/wordlists/subdomains-test.txt` for input-file selection only.",
+  "safety_note": "No DNS takeover checks against real services.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/wordlists/subdomains-test.txt"
+  ]
+}

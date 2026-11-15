@@ -1,0 +1,16 @@
+{
+  "tool": "Crunch",
+  "slug": "crunch",
+  "category": "Wordlist generation",
+  "fixture_mode": "offline_small_output",
+  "simple_test_scenario": "Generate a tiny two-character sample from a two-character charset; compare with `common/wordlists/crunch-expected.txt`.",
+  "safety_note": "Keep output small and local.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/wordlists/crunch-expected.txt"
+  ]
+}

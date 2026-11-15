@@ -1,0 +1,16 @@
+{
+  "tool": "NSLookup",
+  "slug": "nslookup",
+  "category": "DNS lookup",
+  "fixture_mode": "loopback_or_lab_dns",
+  "simple_test_scenario": "Query `localhost` or a lab DNS name if configured.",
+  "safety_note": "No public targets by default.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/dns/dns-records.csv"
+  ]
+}

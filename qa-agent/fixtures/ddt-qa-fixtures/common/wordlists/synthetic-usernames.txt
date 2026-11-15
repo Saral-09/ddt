@@ -1,0 +1,3 @@
+# Synthetic labels only; do not use for authentication attacks.
+qa-user
+sample-user

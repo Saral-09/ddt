@@ -1,0 +1,6 @@
+DDT QA fixture text
+===================
+This is synthetic sample content for testing file-input fields.
+Fixture ID: DDT-TEXT-001
+Keywords: alpha, beta, gamma, network, security, testing
+No real credentials, personal data, or production information.

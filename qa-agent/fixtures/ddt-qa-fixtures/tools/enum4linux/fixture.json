@@ -1,0 +1,16 @@
+{
+  "tool": "Enum4Linux",
+  "slug": "enum4linux",
+  "category": "SMB enumeration",
+  "fixture_mode": "single_lab_service",
+  "simple_test_scenario": "Use `10.10.1.201` only when explicitly requested and the lab SMB service is available.",
+  "safety_note": "Read-only enumeration; do not add credential attacks.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

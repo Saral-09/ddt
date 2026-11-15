@@ -1,0 +1,16 @@
+{
+  "tool": "Tiger",
+  "slug": "tiger",
+  "category": "Unix security audit",
+  "fixture_mode": "manual_host_audit",
+  "simple_test_scenario": "Use help/configuration inspection first. A full audit examines the machine running the tool.",
+  "safety_note": "Do not launch automatically; review audit scope first.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/logs/auth.log"
+  ]
+}

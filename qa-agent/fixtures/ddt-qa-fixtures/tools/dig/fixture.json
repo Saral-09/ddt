@@ -1,0 +1,16 @@
+{
+  "tool": "Dig",
+  "slug": "dig",
+  "category": "DNS query",
+  "fixture_mode": "loopback_or_lab_dns",
+  "simple_test_scenario": "Query `localhost` or an explicitly configured lab DNS name.",
+  "safety_note": "No external DNS target by default.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/dns/dns-records.csv"
+  ]
+}

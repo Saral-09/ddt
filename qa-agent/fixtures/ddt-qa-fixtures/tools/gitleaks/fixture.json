@@ -1,0 +1,16 @@
+{
+  "tool": "Gitleaks",
+  "slug": "gitleaks",
+  "category": "Secret scanning",
+  "fixture_mode": "offline_file",
+  "simple_test_scenario": "Scan `common/repo/` containing obviously fake test markers.",
+  "safety_note": "All secret-like strings are invalid test placeholders.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/repo/"
+  ]
+}

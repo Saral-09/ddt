@@ -1,0 +1,16 @@
+{
+  "tool": "Traceroute",
+  "slug": "traceroute",
+  "category": "Route tracing",
+  "fixture_mode": "single_lab_host",
+  "simple_test_scenario": "Trace one explicitly selected lab host, or loopback for UI validation.",
+  "safety_note": "One host only.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

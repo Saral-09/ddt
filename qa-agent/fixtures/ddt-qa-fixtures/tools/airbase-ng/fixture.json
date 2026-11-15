@@ -1,0 +1,16 @@
+{
+  "tool": "Airbase NG",
+  "slug": "airbase-ng",
+  "category": "Wireless AP creation",
+  "fixture_mode": "hardware_required",
+  "simple_test_scenario": "No runnable fixture. Verify form rendering and dependency/help only; requires a dedicated isolated wireless adapter/AP lab.",
+  "safety_note": "Do not create rogue APs or transmit beacons as an automated fixture.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

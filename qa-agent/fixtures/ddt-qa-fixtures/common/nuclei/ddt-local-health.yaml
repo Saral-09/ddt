@@ -1,0 +1,14 @@
+id: ddt-local-health-check
+info:
+  name: DDT QA local health endpoint
+  author: DDT QA fixture
+  severity: info
+  description: Confirms the local DDT fixture health endpoint returns HTTP 200.
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/health"
+    matchers:
+      - type: status
+        status:
+          - 200

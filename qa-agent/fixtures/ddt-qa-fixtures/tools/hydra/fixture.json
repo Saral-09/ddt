@@ -1,0 +1,16 @@
+{
+  "tool": "Hydra",
+  "slug": "hydra",
+  "category": "Login auditing",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "UI validation only. No credential list or runnable authentication attack is provided.",
+  "safety_note": "No brute-force execution.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/wordlists/synthetic-usernames.txt"
+  ]
+}

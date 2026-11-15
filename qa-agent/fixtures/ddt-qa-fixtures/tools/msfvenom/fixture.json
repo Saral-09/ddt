@@ -1,0 +1,16 @@
+{
+  "tool": "msfvenom",
+  "slug": "msfvenom",
+  "category": "Payload generation",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "Help and option validation only.",
+  "safety_note": "No payloads, shellcode or executable artifacts included.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/text/sample.txt"
+  ]
+}

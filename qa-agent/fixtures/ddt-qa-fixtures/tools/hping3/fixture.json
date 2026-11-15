@@ -1,0 +1,16 @@
+{
+  "tool": "Hping3",
+  "slug": "hping3",
+  "category": "Packet crafting",
+  "fixture_mode": "single_lab_packet",
+  "simple_test_scenario": "If explicitly approved, send at most one TCP SYN to one chosen lab host and one port.",
+  "safety_note": "No floods, spoofing or repeated traffic.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

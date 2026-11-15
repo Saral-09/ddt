@@ -1,0 +1,16 @@
+{
+  "tool": "ArpScan",
+  "slug": "arpscan",
+  "category": "ARP discovery",
+  "fixture_mode": "single_lab_host",
+  "simple_test_scenario": "Use one explicitly selected same-LAN lab host; do not use subnet ranges for fixture tests.",
+  "safety_note": "No network sweep.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

@@ -1,0 +1,458 @@
+import { Button, Select, Stack, Switch, TextInput, Alert, Group } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useCallback, useState, useEffect, useRef } from "react";
+import { invoke } from "@tauri-apps/api/core";
+import { CommandHelper } from "../../utils/CommandHelper";
+import ConsoleWrapper from "../ConsoleWrapper/ConsoleWrapperWithBuiltinOverlay";
+import { RenderComponent } from "../UserGuide/UserGuide";
+import { SaveOutputToTextFile_v2 } from "../SaveOutputToFile/SaveOutputToTextFile";
+import { LoadingOverlayAndCancelButton } from "../OverlayAndCancelButton/OverlayAndCancelButton";
+import { checkAllCommandsAvailability } from "../../utils/CommandAvailability";
+import InstallationModal from "../InstallationModal/InstallationModal";
+
+/**
+ * Represents the form values for the BEDTool component.
+ */
+interface FormValuesType {
+    plugin: string;
+    target: string;
+    port: string;
+    email: string;
+    username: string;
+    password: string;
+}
+
+interface BedToolStore {
+    loading: boolean;
+    pid: string;
+    output: string;
+    summary: string;
+    allowSave: boolean;
+    hasSaved: boolean;
+    minimized: boolean;
+}
+
+let bedToolStore: BedToolStore = {
+    loading: false,
+    pid: "",
+    output: "",
+    summary: "",
+    allowSave: false,
+    hasSaved: false,
+    minimized: false,
+};
+
+let bedToolRawOutput = "";
+
+type BedToolStoreListener = () => void;
+const bedToolListeners = new Set<BedToolStoreListener>();
+
+function updateBedToolStore(partial: Partial<BedToolStore>) {
+    bedToolStore = { ...bedToolStore, ...partial };
+    bedToolListeners.forEach((listener) => listener());
+}
+
+function useBedToolStore(): BedToolStore {
+    const [, forceRender] = useState({});
+    useEffect(() => {
+        const listener = () => forceRender({});
+        bedToolListeners.add(listener);
+        return () => {
+            bedToolListeners.delete(listener);
+        };
+    }, []);
+    return bedToolStore;
+}
+
+/**
+ * The BEDTool component.
+ * @returns The BEDTool component.
+ */
+export function BEDTool() {
+    //Persistant Component Variables.
+    const { loading, pid, output, summary, allowSave, hasSaved, minimized } = useBedToolStore();
+
+    // Component State Variables.
+    const [selectedPlugin, setSelectedPlugin] = useState(""); // State variable to store the selected plugin.
+    const [customConfig, setCustomConfig] = useState(false); // State variable to toggle manual network configuration.
+    const [isCommandAvailable, setIsCommandAvailable] = useState(false); // State variable to check if the command is available.
+    const [opened, setOpened] = useState(!isCommandAvailable); // State variable that indicates if the modal is opened.
+    const [loadingModal, setLoadingModal] = useState(true); // State variable to indicate loading state of the modal.
+    const [showAlert, setShowAlert] = useState(true);
+    const alertTimeout = useRef<NodeJS.Timeout | null>(null);
+
+    // Component Constants.
+    const title = "BEDTool"; // Title of the component.
+    const description =
+        "BED (Bruteforce Exploit Detector) is a sophisticated tool designed to check network services for a range of security vulnerabilities including buffer overflows and format string weaknesses."; // Description of the component.
+    const steps =
+        '1. Select a Service: Choose the service to test from the dropdown menu, for instance, "HTTP" to test a web server.\n' +
+        '2. Input Required Fields: Fill in the fields that appear based on the selected service. For example, choosing "FTP" will prompt for additional required fields, such as username and password.\n' +
+        "3. Manual Network Configuration (Optional): Activate 'Manual Network Configuration' to enter a specific target IP address and port number. If this is not enabled, the tool will default to scanning the local machine.\n" +
+        "4. Start Scan: Click the 'Scan' button to begin the evaluation.";
+    const sourceLink = "https://www.kali.org/tools/bed/"; // Link to the source documentation.
+    const tutorial = "https://hackmd.io/@zee-10/ryfv2IOSWl"; // Link to the official documentation/tutorial.
+    const dependencies = ["bed"]; // Contains the dependencies required by the component.
+
+    // Plugin-related constants
+    const pluginList = ["FTP", "SMTP", "POP", "HTTP", "IRC", "IMAP", "PJL", "LPD", "FINGER", "SOCKS4"];
+    const pluginsRequiringAuth = ["FTP", "IMAP", "POP"];
+    const pluginRequiringEmail = ["SMTP"];
+    const pluginsRequiringUsername = ["SOCKS4"];
+
+    // Form hook to handle form input.
+    const form = useForm<FormValuesType>({
+        initialValues: {
+            plugin: "",
+            target: "",
+            port: "",
+            email: "",
+            username: "",
+            password: "",
+        },
+        validate: {
+            username: (value, values) => {
+                if (pluginsRequiringAuth.includes(values.plugin) || pluginsRequiringUsername.includes(values.plugin)) {
+                    return /^[a-zA-Z0-9_]+$/.test(value) ? null : "Invalid username";
+                }
+                return null;
+            },
+            password: (value, values) => {
+                if (pluginsRequiringAuth.includes(values.plugin)) {
+                    return value.length >= 8 ? null : "Password must be at least 8 characters";
+                }
+                return null;
+            },
+            email: (value, values) => {
+                if (values.plugin === "SMTP") {
+                    return /^\S+@\S+\.\S+$/.test(value) ? null : "Invalid email";
+                }
+                return null;
+            },
+        },
+    });
+
+    // Check if the command is available and set the state variables accordingly.
+    useEffect(() => {
+        checkAllCommandsAvailability(dependencies)
+            .then((isAvailable) => {
+                setIsCommandAvailable(isAvailable); // Set the command availability state
+                setOpened(!isAvailable); // Set the modal state to opened if the command is not available
+                setLoadingModal(false); // Set loading to false after the check is done
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+                setLoadingModal(false); // Also set loading to false in case of error
+            });
+        // Set timeout to remove alert after 5 seconds on load.
+        alertTimeout.current = setTimeout(() => {
+            setShowAlert(false);
+        }, 5000);
+
+        return () => {
+            if (alertTimeout.current) {
+                clearTimeout(alertTimeout.current);
+            }
+        };
+    }, []);
+
+    const handleShowAlert = () => {
+        setShowAlert(true);
+        if (alertTimeout.current) {
+            clearTimeout(alertTimeout.current);
+        }
+        alertTimeout.current = setTimeout(() => {
+            setShowAlert(false);
+        }, 5000);
+    };
+
+    /**
+     * handleProcessData: Callback to handle and append new data from the child process to the output.
+     * It updates the state by appending the new data received to the existing output.
+     * @param {string} data - The data received from the child process.
+     */
+    const handleProcessData = useCallback((data: string) => {
+        bedToolRawOutput += "\n" + data;
+        updateBedToolStore({ output: bedToolStore.output + "\n" + data }); // Append new data to the previous output.
+    }, []);
+
+    const getTestCategories = () => {
+        const scanOutput = bedToolRawOutput;
+        const categories: string[] = [];
+
+        if (scanOutput.includes("Buffer overflow testing")) {
+            categories.push("Buffer overflow");
+        }
+
+        if (scanOutput.includes("Formatstring testing")) {
+            categories.push("Format string");
+        }
+
+        if (scanOutput.includes("Unicode testing")) {
+            categories.push("Unicode");
+        }
+
+        if (scanOutput.includes("random number testing")) {
+            categories.push("Random number");
+        }
+
+        if (scanOutput.includes("testing misc strings")) {
+            categories.push("Misc strings");
+        }
+
+        return categories.length > 0 ? categories.join(", ") : `${selectedPlugin} security tests`;
+    };
+
+    /**
+     * handleProcessTermination: Callback to handle the termination of the child process.
+     * Once the process termination is handled, it clears the process PID reference and
+     * deactivates the loading overlay.
+     * @param {object} param - An object containing information about the process termination.
+     * @param {number} param.code - The exit code of the terminated process.
+     * @param {number} param.signal - The signal code indicating how the process was terminated.
+     */
+
+    const handleProcessTermination = useCallback(
+        ({ code, signal }: { code: number; signal: number }) => {
+            if (code === 0) {
+                updateBedToolStore({
+                    summary: `Scan Status: Completed
+		Target Connection: Successful
+		Tests Completed: ${getTestCategories()}
+		Potential Vulnerabilities Detected: Not confirmed
+		Findings Count: Not available
+		Full Results: Available in the output panel and exported file`,
+                });
+
+                handleProcessData("\nProcess completed successfully.");
+            } else if (signal === 15) {
+                updateBedToolStore({
+                    summary: `Scan Status: Partially Completed
+		Target Connection: Successful
+		Test Categories Observed: ${getTestCategories()}
+		Potential Vulnerabilities Detected: Not confirmed
+		Findings Count: Not available
+		Full Results: Available in the output panel`,
+                });
+                handleProcessData("\nProcess was manually terminated.");
+            } else {
+                handleProcessData(`\nProcess terminated with exit code: ${code} and signal code: ${signal}`);
+            }
+
+            updateBedToolStore({
+                pid: "", // Clear the child process pid reference.
+                loading: false, // Cancel the loading overlay.
+                allowSave: true, // Allow Saving as the output is finalised.
+                hasSaved: false,
+                minimized: false, //Un-minimize as result is visible
+            });
+        },
+        [handleProcessData, selectedPlugin, getTestCategories],
+    );
+
+    /**
+     * Function to handle completion of saving output to a text file.
+     * Sets the hasSaved flag to true and disallows further saving.
+     */
+    const handleSaveComplete = () => {
+        updateBedToolStore({ hasSaved: true, allowSave: false });
+    };
+
+    /**
+     * onSubmit: Handler function that is triggered when the form is submitted.
+     * It first checks that the target host/port is reachable, then prepares
+     * the arguments and initiates the execution of the `bed` command.
+     * @param {FormValuesType} values - An object containing the form input values.
+     */
+    const onSubmit = (values: FormValuesType) => {
+        updateBedToolStore({ allowSave: false, loading: true, summary: "", minimized: false });
+        bedToolRawOutput = "";
+
+        invoke<void>("check_target_reachable", {
+            host: values.target,
+            port: parseInt(values.port, 10),
+        })
+            .then(() => {
+                runBed(values);
+            })
+            .catch((err: string) => {
+                updateBedToolStore({ loading: false, output: err });
+            });
+    };
+
+    /**
+     * runBed: Prepares the arguments and initiates execution of the `bed` command.
+     * Only called after the target reachability check passes.
+     * @param {FormValuesType} values - An object containing the form input values.
+     */
+    const runBed = (values: FormValuesType) => {
+        const baseArgs = ["-s", values.plugin];
+        const conditionalArgs: string[][] = [
+            customConfig ? ["-t", values.target, "-p", values.port] : [],
+            pluginsRequiringAuth.includes(selectedPlugin) ? ["-u", values.username] : [],
+            pluginsRequiringUsername.includes(selectedPlugin) ? ["-u", values.username] : [],
+            selectedPlugin === "SMTP" ? ["-u", values.email] : [],
+            pluginsRequiringAuth.includes(selectedPlugin) ? ["-v", values.password] : [],
+        ];
+
+        const args = baseArgs.concat(conditionalArgs.filter(Boolean).flat());
+
+        CommandHelper.runCommandGetPidAndOutput("bed", args, handleProcessData, handleProcessTermination)
+            .then(({ pid, output }) => {
+                updateBedToolStore({ pid, output });
+            })
+            .catch((error) => {
+                updateBedToolStore({ loading: false, output: `Error: ${error.message}` });
+            });
+    };
+
+    /**
+     * Function to clear output and reset save status.
+     */
+    const clearOutput = useCallback(() => {
+        updateBedToolStore({ output: "", hasSaved: false, allowSave: false });
+    }, []);
+
+    /**
+     * Handler for selecting a service plugin from the dropdown menu.
+     * @param {string} value - The selected plugin's value.
+     */
+    const handlePluginChange = (value: string) => {
+        form.setFieldValue("plugin", value);
+        setSelectedPlugin(value);
+    };
+
+    return (
+        <RenderComponent
+            title={title}
+            description={description}
+            steps={steps}
+            tutorial={tutorial}
+            sourceLink={sourceLink}
+        >
+            {!loadingModal && (
+                <InstallationModal
+                    isOpen={opened}
+                    setOpened={setOpened}
+                    feature_description={description}
+                    dependencies={dependencies}
+                ></InstallationModal>
+            )}
+            <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
+                <Stack>
+                    <Group position="right">
+                        {!showAlert && (
+                            <Button onClick={handleShowAlert} size="xs" variant="outline" color="gray">
+                                Show Disclaimer
+                            </Button>
+                        )}
+                    </Group>
+                    {LoadingOverlayAndCancelButton(loading, pid, minimized, (v) =>
+                        updateBedToolStore({ minimized: v }),
+                    )}
+
+                    {showAlert && (
+                        <Alert title="Warning: Potential Risks" color="red">
+                            This tool is used to perform vulnerability scans, use with caution and only on networks you
+                            own or have explicit permission to test.
+                        </Alert>
+                    )}
+
+                    <Switch
+                        size="md"
+                        label="Manual Network Configuration"
+                        checked={customConfig}
+                        onChange={(e) => setCustomConfig(e.currentTarget.checked)}
+                    />
+                    {customConfig && (
+                        <Alert title="Manual Network Configuration" color="blue" variant="light">
+                            Custom IP address and port can now be specified for this scan. Leave these fields blank to
+                            use default settings.
+                        </Alert>
+                    )}
+                    {["SMTP", "POP", "IMAP"].includes(selectedPlugin) && (
+                        <Alert title="No TLS Support" color="yellow" variant="light">
+                            BED does not support TLS. Only test this protocol against plain (non-TLS) local or lab
+                            services — not production or TLS-only endpoints.
+                        </Alert>
+                    )}
+                    <Select
+                        label="Plugin Type"
+                        placeholder="Select a plugin to test"
+                        data={pluginList}
+                        required
+                        value={selectedPlugin}
+                        onChange={handlePluginChange}
+                    />
+                    {pluginsRequiringAuth.includes(selectedPlugin) && (
+                        <>
+                            <TextInput
+                                label="Username"
+                                placeholder="Enter username for authentication"
+                                description="Default user is the same as your Kali Linux login"
+                                required
+                                {...form.getInputProps("username")}
+                            />
+                            <TextInput
+                                label="Password"
+                                type="password"
+                                placeholder="Enter the password for authentication"
+                                description="Must be at least 8 characters"
+                                required
+                                {...form.getInputProps("password")}
+                            />
+                        </>
+                    )}
+                    {pluginsRequiringUsername.includes(selectedPlugin) &&
+                        !pluginsRequiringAuth.includes(selectedPlugin) && (
+                            <TextInput
+                                label="Username"
+                                placeholder="e.g. user123"
+                                description="Enter the username required for this scan"
+                                required
+                                {...form.getInputProps("username")}
+                            />
+                        )}
+                    {selectedPlugin === "SMTP" && (
+                        <TextInput
+                            label="Email Address (used as sender in test)"
+                            placeholder="e.g. test@example.com"
+                            required
+                            {...form.getInputProps("email")}
+                        />
+                    )}
+                    {customConfig && (
+                        <>
+                            <TextInput
+                                label="Target IP Address"
+                                placeholder="e.g. 192.168.1.1"
+                                description="Specify the IP address of the target"
+                                required
+                                {...form.getInputProps("target")}
+                            />
+                            <TextInput
+                                label="Target Port Number"
+                                placeholder="e.g. 80"
+                                description="Specify the port number of the target"
+                                required
+                                {...form.getInputProps("port")}
+                            />
+                        </>
+                    )}
+                    {SaveOutputToTextFile_v2(output, allowSave, hasSaved, handleSaveComplete)}
+                    <Button type={"submit"} disabled={loading}>
+                        Scan
+                    </Button>
+                    {summary && (
+                        <Alert title="Vulnerability Summary" color="blue">
+                            <pre style={{ whiteSpace: "pre-wrap", margin: 0 }}>{summary}</pre>
+                        </Alert>
+                    )}
+                    <ConsoleWrapper output={output} clearOutputCallback={clearOutput} pid={pid} loading={loading} />
+                </Stack>
+            </form>
+        </RenderComponent>
+    );
+}
+
+export default BEDTool;

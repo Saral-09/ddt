@@ -1,0 +1,31 @@
+{
+  "description": "User-provided DDT.com lab topology. Only test an individual target explicitly named in the current task.",
+  "attacker_not_a_target": {
+    "role": "PC1 - DDT attacker machine",
+    "ip": "10.10.1.202",
+    "testable": false
+  },
+  "targets": [
+    {
+      "role": "PC2 external-side address",
+      "ip": "192.168.1.201",
+      "allowed_when_explicitly_requested": true
+    },
+    {
+      "role": "PC2 internal-side address",
+      "ip": "10.10.1.201",
+      "allowed_when_explicitly_requested": true
+    },
+    {
+      "role": "DDT.com Active Directory server",
+      "ip": "10.10.1.200",
+      "allowed_when_explicitly_requested": true
+    }
+  ],
+  "rules": [
+    "Do not scan entire subnets.",
+    "Do not target 10.10.1.202.",
+    "Do not infer that the two PC2 addresses are interchangeable.",
+    "Only use a lab IP when explicitly requested for a test."
+  ]
+}

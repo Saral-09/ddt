@@ -1,0 +1,16 @@
+{
+  "tool": "ARP Spoofing",
+  "slug": "arp-spoofing",
+  "category": "ARP cache poisoning",
+  "fixture_mode": "manual_only",
+  "simple_test_scenario": "UI validation and command-preview only.",
+  "safety_note": "No packet injection or man-in-the-middle execution.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/targets/lab-targets.json"
+  ]
+}

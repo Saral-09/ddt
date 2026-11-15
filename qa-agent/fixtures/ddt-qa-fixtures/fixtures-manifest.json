@@ -1,0 +1,1173 @@
+{
+  "pack_name": "DDT QA Fixture Pack",
+  "version": "1.0",
+  "tool_count": 73,
+  "generated_at": "2026-11-12T05:34:47.693902+00:00",
+  "tools": [
+    {
+      "tool": "Airbase NG",
+      "slug": "airbase-ng",
+      "category": "Wireless AP creation",
+      "fixture_mode": "hardware_required",
+      "simple_test_scenario": "No runnable fixture. Verify form rendering and dependency/help only; requires a dedicated isolated wireless adapter/AP lab.",
+      "safety_note": "Do not create rogue APs or transmit beacons as an automated fixture.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Aircrack NG",
+      "slug": "aircrack-ng",
+      "category": "Wireless capture analysis",
+      "fixture_mode": "offline_capture_only",
+      "simple_test_scenario": "Use the supplied synthetic PCAP only to verify file selection/error handling; it is not a WPA handshake. A separate captured lab handshake is required for meaningful analysis.",
+      "safety_note": "No cracking or capture collection included.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/pcap/ddt-synthetic-http.pcap"
+      ]
+    },
+    {
+      "tool": "Amass",
+      "slug": "amass",
+      "category": "Domain mapping",
+      "fixture_mode": "passive_scope_required",
+      "simple_test_scenario": "Use `ddt.test` as a placeholder for UI validation; live enumeration requires an explicitly authorised domain and network scope.",
+      "safety_note": "Do not run passive internet enumeration as a default fixture.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/subdomains-test.txt"
+      ]
+    },
+    {
+      "tool": "Arjun",
+      "slug": "arjun",
+      "category": "HTTP parameter discovery",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Target `http://127.0.0.1:18080/search?q=sample` using the local web fixture.",
+      "safety_note": "Local fixture only; no external web targets.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "Arpaname",
+      "slug": "arpaname",
+      "category": "Reverse DNS lookup",
+      "fixture_mode": "lab_or_loopback",
+      "simple_test_scenario": "Use `127.0.0.1` for loopback validation or an explicitly selected lab IP from `lab-targets.json`.",
+      "safety_note": "DNS result depends on local resolver.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "ARP Fingerprint",
+      "slug": "arp-fingerprint",
+      "category": "ARP device fingerprinting",
+      "fixture_mode": "single_lab_host",
+      "simple_test_scenario": "Use `10.10.1.201` only when explicitly selected and on the same L2 segment.",
+      "safety_note": "Do not scan ranges.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Arping",
+      "slug": "arping",
+      "category": "ARP ping",
+      "fixture_mode": "single_lab_host",
+      "simple_test_scenario": "Use one explicitly selected same-LAN lab host, preferably `10.10.1.201`.",
+      "safety_note": "Single host only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "ArpScan",
+      "slug": "arpscan",
+      "category": "ARP discovery",
+      "fixture_mode": "single_lab_host",
+      "simple_test_scenario": "Use one explicitly selected same-LAN lab host; do not use subnet ranges for fixture tests.",
+      "safety_note": "No network sweep.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "ARP Spoofing",
+      "slug": "arp-spoofing",
+      "category": "ARP cache poisoning",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "UI validation and command-preview only.",
+      "safety_note": "No packet injection or man-in-the-middle execution.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "BED",
+      "slug": "bed",
+      "category": "Service fuzzing",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "Inspect help and validate a loopback-only form configuration without launching fuzzing.",
+      "safety_note": "Fuzzing can disrupt services; no live execution fixture.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/local-services/README.md"
+      ]
+    },
+    {
+      "tool": "Bully",
+      "slug": "bully",
+      "category": "WPS PIN attack",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "UI validation and help-only checks.",
+      "safety_note": "No WPS brute-force execution or wireless target.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Cewl",
+      "slug": "cewl",
+      "category": "Website word extraction",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/` against the included local web fixture.",
+      "safety_note": "Constrain crawl to loopback.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "CloudBrute",
+      "slug": "cloudbrute",
+      "category": "Cloud asset discovery",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "Use `ddt.test` as a text-field validation value only.",
+      "safety_note": "No cloud enumeration or third-party provider probing.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": []
+    },
+    {
+      "tool": "Crunch",
+      "slug": "crunch",
+      "category": "Wordlist generation",
+      "fixture_mode": "offline_small_output",
+      "simple_test_scenario": "Generate a tiny two-character sample from a two-character charset; compare with `common/wordlists/crunch-expected.txt`.",
+      "safety_note": "Keep output small and local.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/crunch-expected.txt"
+      ]
+    },
+    {
+      "tool": "dmitry",
+      "slug": "dmitry",
+      "category": "Information gathering",
+      "fixture_mode": "local_or_help_only",
+      "simple_test_scenario": "Use `127.0.0.1` for basic target validation; local DNS/WHOIS data may be unavailable.",
+      "safety_note": "Do not query third-party targets.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": []
+    },
+    {
+      "tool": "DNSenum",
+      "slug": "dnsenum",
+      "category": "DNS enumeration",
+      "fixture_mode": "manual_local_dns",
+      "simple_test_scenario": "Use `ddt.test` for field validation; meaningful DNS enumeration requires a lab DNS zone configured by the user.",
+      "safety_note": "No external domain enumeration.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/dns/example-zone.txt"
+      ]
+    },
+    {
+      "tool": "DNSMap",
+      "slug": "dnsmap",
+      "category": "DNS mapping",
+      "fixture_mode": "manual_local_dns",
+      "simple_test_scenario": "Use `ddt.test` as an input validation fixture.",
+      "safety_note": "No external DNS enumeration.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/dns/example-zone.txt"
+      ]
+    },
+    {
+      "tool": "DNSRecon",
+      "slug": "dnsrecon",
+      "category": "DNS reconnaissance",
+      "fixture_mode": "manual_local_dns",
+      "simple_test_scenario": "Use `ddt.test` with a lab resolver only if configured.",
+      "safety_note": "No zone transfer attempts against third parties.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/dns/example-zone.txt"
+      ]
+    },
+    {
+      "tool": "Dig",
+      "slug": "dig",
+      "category": "DNS query",
+      "fixture_mode": "loopback_or_lab_dns",
+      "simple_test_scenario": "Query `localhost` or an explicitly configured lab DNS name.",
+      "safety_note": "No external DNS target by default.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/dns/dns-records.csv"
+      ]
+    },
+    {
+      "tool": "Enum4Linux",
+      "slug": "enum4linux",
+      "category": "SMB enumeration",
+      "fixture_mode": "single_lab_service",
+      "simple_test_scenario": "Use `10.10.1.201` only when explicitly requested and the lab SMB service is available.",
+      "safety_note": "Read-only enumeration; do not add credential attacks.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Exif",
+      "slug": "exif",
+      "category": "Image metadata extraction",
+      "fixture_mode": "offline_file",
+      "simple_test_scenario": "Select `common/images/ddt-exif-sample.jpg`.",
+      "safety_note": "Synthetic EXIF metadata only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/images/ddt-exif-sample.jpg"
+      ]
+    },
+    {
+      "tool": "EyeWitness",
+      "slug": "eyewitness",
+      "category": "Web screenshot and service capture",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/`.",
+      "safety_note": "Local-only screenshots.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "Fcrackzip",
+      "slug": "fcrackzip",
+      "category": "ZIP password recovery",
+      "fixture_mode": "offline_file_only",
+      "simple_test_scenario": "Use `common/archive/ddt-password-protected.zip`; fixture password is documented in `PASSWORD.txt`.",
+      "safety_note": "Only the supplied synthetic archive; do not target user archives.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/archive/ddt-password-protected.zip"
+      ]
+    },
+    {
+      "tool": "FFuf",
+      "slug": "ffuf",
+      "category": "Web content discovery",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use local web fixture and `common/wordlists/web-small.txt`; set a low request rate if supported.",
+      "safety_note": "Loopback only; small wordlist.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/web-small.txt",
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "Foremost",
+      "slug": "foremost",
+      "category": "File carving",
+      "fixture_mode": "offline_file",
+      "simple_test_scenario": "Select `common/forensics/ddt-sample-disk.img`; expected embedded types include JPEG and ZIP.",
+      "safety_note": "Output to a new disposable directory.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/forensics/ddt-sample-disk.img"
+      ]
+    },
+    {
+      "tool": "Fping",
+      "slug": "fping",
+      "category": "Host reachability",
+      "fixture_mode": "single_lab_host",
+      "simple_test_scenario": "Ping one explicitly selected lab host once if the UI supports a count option; otherwise use loopback.",
+      "safety_note": "No subnet sweep.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "FTPconnect",
+      "slug": "ftpconnect",
+      "category": "FTP client",
+      "fixture_mode": "service_required",
+      "simple_test_scenario": "Use `127.0.0.1` only if the user has configured a local FTP fixture. No FTP daemon is bundled.",
+      "safety_note": "Do not connect to external FTP servers.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/local-services/README.md"
+      ]
+    },
+    {
+      "tool": "Gitleaks",
+      "slug": "gitleaks",
+      "category": "Secret scanning",
+      "fixture_mode": "offline_file",
+      "simple_test_scenario": "Scan `common/repo/` containing obviously fake test markers.",
+      "safety_note": "All secret-like strings are invalid test placeholders.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/repo/"
+      ]
+    },
+    {
+      "tool": "GoBuster",
+      "slug": "gobuster",
+      "category": "Web content discovery",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/` with `common/wordlists/web-small.txt`.",
+      "safety_note": "Loopback only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/web-small.txt",
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "GoldenEye",
+      "slug": "goldeneye",
+      "category": "HTTP denial-of-service",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "UI validation and help-only checks.",
+      "safety_note": "No load or denial-of-service execution.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "Gyoithon",
+      "slug": "gyoithon",
+      "category": "AI web application pentesting",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "Use the local web fixture for form validation only; do not execute AI-driven exploitation.",
+      "safety_note": "No automated exploitation.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": []
+    },
+    {
+      "tool": "Hashcat",
+      "slug": "hashcat",
+      "category": "Offline hash testing",
+      "fixture_mode": "offline_file_only",
+      "simple_test_scenario": "Use `common/hashes/md5-test-only.txt` with `common/wordlists/tiny-fixture-words.txt`; MD5 mode 0.",
+      "safety_note": "Only synthetic fixture hash.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/hashes/md5-test-only.txt",
+        "common/wordlists/tiny-fixture-words.txt"
+      ]
+    },
+    {
+      "tool": "Hping3",
+      "slug": "hping3",
+      "category": "Packet crafting",
+      "fixture_mode": "single_lab_packet",
+      "simple_test_scenario": "If explicitly approved, send at most one TCP SYN to one chosen lab host and one port.",
+      "safety_note": "No floods, spoofing or repeated traffic.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Hydra",
+      "slug": "hydra",
+      "category": "Login auditing",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "UI validation only. No credential list or runnable authentication attack is provided.",
+      "safety_note": "No brute-force execution.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/synthetic-usernames.txt"
+      ]
+    },
+    {
+      "tool": "JohnTheRipper",
+      "slug": "johntheripper",
+      "category": "Offline password hash audit",
+      "fixture_mode": "offline_file_only",
+      "simple_test_scenario": "Use `common/hashes/md5-test-only.txt` and the tiny fixture wordlist.",
+      "safety_note": "Only the synthetic fixture hash.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/hashes/md5-test-only.txt",
+        "common/wordlists/tiny-fixture-words.txt"
+      ]
+    },
+    {
+      "tool": "Masscan",
+      "slug": "masscan",
+      "category": "High-speed port scanner",
+      "fixture_mode": "single_lab_port_only",
+      "simple_test_scenario": "If explicitly approved, scan one port on one lab IP at a very low rate.",
+      "safety_note": "Never use broad ranges or high rates.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Metagoofil",
+      "slug": "metagoofil",
+      "category": "Document metadata collection",
+      "fixture_mode": "offline_or_local_docs",
+      "simple_test_scenario": "Use the included DOCX/PDF files for metadata inspection; remote harvesting is not part of this fixture.",
+      "safety_note": "No internet document harvesting.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/documents/ddt-sample-report.docx",
+        "common/documents/ddt-sample-report.pdf"
+      ]
+    },
+    {
+      "tool": "msfvenom",
+      "slug": "msfvenom",
+      "category": "Payload generation",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "Help and option validation only.",
+      "safety_note": "No payloads, shellcode or executable artifacts included.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/text/sample.txt"
+      ]
+    },
+    {
+      "tool": "Nbtscan",
+      "slug": "nbtscan",
+      "category": "NetBIOS discovery",
+      "fixture_mode": "single_lab_host",
+      "simple_test_scenario": "Use one explicitly selected internal lab Windows host, `10.10.1.201`.",
+      "safety_note": "Single host only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Netcat",
+      "slug": "netcat",
+      "category": "TCP client/server",
+      "fixture_mode": "loopback_service",
+      "simple_test_scenario": "Start `common/local-services/echo_server.py`, then connect to `127.0.0.1:18081` and send `DDT-QA`.",
+      "safety_note": "Loopback-only echo service.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/local-services/echo_server.py"
+      ]
+    },
+    {
+      "tool": "NetDiscover",
+      "slug": "netdiscover",
+      "category": "Network discovery",
+      "fixture_mode": "manual_single_host",
+      "simple_test_scenario": "Validate interface and target fields; actual ARP discovery requires a same-L2 lab and user-selected host.",
+      "safety_note": "No automatic network range sweep.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Nikto",
+      "slug": "nikto",
+      "category": "Web server scanner",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/` only; keep tests low-intensity and expect a basic static server.",
+      "safety_note": "Local-only; no external web scanning.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "Nmap",
+      "slug": "nmap",
+      "category": "Network scanner",
+      "fixture_mode": "single_lab_host",
+      "simple_test_scenario": "Use `192.168.1.201` and ports `21,80,135,139,445` when explicitly requested; previously observed open-port results are historical, not guaranteed.",
+      "safety_note": "One host and selected ports only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "NSLookup",
+      "slug": "nslookup",
+      "category": "DNS lookup",
+      "fixture_mode": "loopback_or_lab_dns",
+      "simple_test_scenario": "Query `localhost` or a lab DNS name if configured.",
+      "safety_note": "No public targets by default.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/dns/dns-records.csv"
+      ]
+    },
+    {
+      "tool": "Nuclei",
+      "slug": "nuclei",
+      "category": "Template-based checks",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080` with `common/nuclei/ddt-local-health.yaml`.",
+      "safety_note": "Supplied template performs one benign GET to /health.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/nuclei/ddt-local-health.yaml"
+      ]
+    },
+    {
+      "tool": "Parsero",
+      "slug": "parsero",
+      "category": "robots.txt analysis",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/robots.txt`.",
+      "safety_note": "Local fixture only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/local-web/robots.txt"
+      ]
+    },
+    {
+      "tool": "Photon",
+      "slug": "photon",
+      "category": "Web crawler",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/` with shallow crawl limits.",
+      "safety_note": "Loopback only; limit depth.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "Rainbowcrack",
+      "slug": "rainbowcrack",
+      "category": "Rainbow table lookup",
+      "fixture_mode": "offline_fixture_only",
+      "simple_test_scenario": "Use the supplied synthetic hash and a disposable table generated by the script in `common/rainbowcrack/`.",
+      "safety_note": "Do not use real hashes or pre-existing tables.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/hashes/md5-test-only.txt",
+        "common/rainbowcrack/"
+      ]
+    },
+    {
+      "tool": "Rtgen",
+      "slug": "rtgen",
+      "category": "Rainbow table generation",
+      "fixture_mode": "disposable_local_generation",
+      "simple_test_scenario": "Use `common/rainbowcrack/generate-disposable-table.sh` manually to generate a tiny table.",
+      "safety_note": "Writes generated table files; run only in the isolated fixture directory.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/rainbowcrack/generate-disposable-table.sh"
+      ]
+    },
+    {
+      "tool": "Rtsort",
+      "slug": "rtsort",
+      "category": "Rainbow table sorting",
+      "fixture_mode": "disposable_local_file",
+      "simple_test_scenario": "Generate a tiny disposable `.rt` table first, then select only its output directory.",
+      "safety_note": "Sorting modifies files; never select a user\u2019s real rainbow-table directory.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/rainbowcrack/generate-disposable-table.sh"
+      ]
+    },
+    {
+      "tool": "SearchSploit",
+      "slug": "searchsploit",
+      "category": "Exploit database search",
+      "fixture_mode": "offline_search_only",
+      "simple_test_scenario": "Search a harmless product string such as `OpenSSH` in the local Exploit-DB index. Do not execute exploit code.",
+      "safety_note": "Search only; no exploit execution.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/text/sample.txt"
+      ]
+    },
+    {
+      "tool": "Sherlock",
+      "slug": "sherlock",
+      "category": "Username OSINT",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "UI validation with `ddt-qa-fixture-user` only; do not perform internet-wide account checks automatically.",
+      "safety_note": "No public account enumeration.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/synthetic-usernames.txt"
+      ]
+    },
+    {
+      "tool": "Shodan API tool",
+      "slug": "shodan-api-tool",
+      "category": "Shodan search",
+      "fixture_mode": "api_key_required",
+      "simple_test_scenario": "Use placeholder query text only. Requires the user\u2019s own API key before a real request.",
+      "safety_note": "No API key included; never store credentials in fixture files.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "SlowHttpTest",
+      "slug": "slowhttptest",
+      "category": "Slow HTTP denial-of-service",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "UI validation and help-only checks.",
+      "safety_note": "No slow-connection or DoS execution.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "SMB Enumeration",
+      "slug": "smb-enumeration",
+      "category": "SMB enumeration",
+      "fixture_mode": "single_lab_service",
+      "simple_test_scenario": "Use `10.10.1.201` only when explicitly requested and SMB is available.",
+      "safety_note": "Read-only enumeration; no credential guessing.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "SMB-Ghost Scanner",
+      "slug": "smb-ghost-scanner",
+      "category": "SMB vulnerability detection",
+      "fixture_mode": "single_lab_host",
+      "simple_test_scenario": "Use the internal lab Windows host `10.10.1.201` only when explicitly authorised.",
+      "safety_note": "Detection only; never exploit.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "SnmpCheck",
+      "slug": "snmpcheck",
+      "category": "SNMP enumeration",
+      "fixture_mode": "single_lab_service",
+      "simple_test_scenario": "Use one explicitly selected lab host and UDP/161 only if SNMP is configured.",
+      "safety_note": "No community-string guessing.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "SQLmap",
+      "slug": "sqlmap",
+      "category": "SQL injection testing",
+      "fixture_mode": "manual_local_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/search?q=sample` for input validation only. The bundled server is not SQL-backed or vulnerable.",
+      "safety_note": "Do not run exploitation, dumping or time-based tests.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "Sqlninja",
+      "slug": "sqlninja",
+      "category": "SQL Server exploitation",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "Form validation and help-only checks. No SQL Server target is bundled.",
+      "safety_note": "No exploitation.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": []
+    },
+    {
+      "tool": "Subjack",
+      "slug": "subjack",
+      "category": "Subdomain takeover detection",
+      "fixture_mode": "manual_local_data",
+      "simple_test_scenario": "Use `common/wordlists/subdomains-test.txt` for input-file selection only.",
+      "safety_note": "No DNS takeover checks against real services.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/subdomains-test.txt"
+      ]
+    },
+    {
+      "tool": "Sublist3r",
+      "slug": "sublist3r",
+      "category": "Subdomain enumeration",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "Use `ddt.test` for form validation only.",
+      "safety_note": "No external enumeration.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/subdomains-test.txt"
+      ]
+    },
+    {
+      "tool": "Tcpdump",
+      "slug": "tcpdump",
+      "category": "Packet capture analysis",
+      "fixture_mode": "offline_file",
+      "simple_test_scenario": "Read `common/pcap/ddt-synthetic-http.pcap` as an offline capture.",
+      "safety_note": "Do not start live capture by default.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/pcap/ddt-synthetic-http.pcap"
+      ]
+    },
+    {
+      "tool": "Testssl",
+      "slug": "testssl",
+      "category": "TLS configuration test",
+      "fixture_mode": "local_tls_only",
+      "simple_test_scenario": "Start `common/tls/server.py` and test `127.0.0.1:18443`. The certificate is self-signed.",
+      "safety_note": "Loopback-only; certificate key is test-only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/tls/localhost-cert.pem",
+        "common/tls/localhost-key.pem"
+      ]
+    },
+    {
+      "tool": "The Harvester",
+      "slug": "the-harvester",
+      "category": "OSINT collection",
+      "fixture_mode": "manual_only",
+      "simple_test_scenario": "Use `ddt.test` for form validation. Real providers require explicit scope and possibly API keys.",
+      "safety_note": "No internet harvesting.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/wordlists/subdomains-test.txt"
+      ]
+    },
+    {
+      "tool": "Tiger",
+      "slug": "tiger",
+      "category": "Unix security audit",
+      "fixture_mode": "manual_host_audit",
+      "simple_test_scenario": "Use help/configuration inspection first. A full audit examines the machine running the tool.",
+      "safety_note": "Do not launch automatically; review audit scope first.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/logs/auth.log"
+      ]
+    },
+    {
+      "tool": "Traceroute",
+      "slug": "traceroute",
+      "category": "Route tracing",
+      "fixture_mode": "single_lab_host",
+      "simple_test_scenario": "Trace one explicitly selected lab host, or loopback for UI validation.",
+      "safety_note": "One host only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Unicornscan",
+      "slug": "unicornscan",
+      "category": "Port scanner",
+      "fixture_mode": "single_lab_port_only",
+      "simple_test_scenario": "Use one explicitly selected lab IP and one TCP port with conservative settings if the component supports it.",
+      "safety_note": "No broad/high-rate scan.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "Urlsnarf",
+      "slug": "urlsnarf",
+      "category": "HTTP traffic capture",
+      "fixture_mode": "manual_capture_only",
+      "simple_test_scenario": "Use the supplied PCAP only if the component supports offline input; otherwise generate local HTTP traffic and capture loopback manually.",
+      "safety_note": "Live capture requires explicit interface approval.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/pcap/ddt-synthetic-http.pcap"
+      ]
+    },
+    {
+      "tool": "Wafw00f",
+      "slug": "wafw00f",
+      "category": "WAF fingerprinting",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/`; expected to report no known WAF on the simple fixture.",
+      "safety_note": "Loopback only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "WhatWeb",
+      "slug": "whatweb",
+      "category": "Web technology identification",
+      "fixture_mode": "local_web_only",
+      "simple_test_scenario": "Use `http://127.0.0.1:18080/`.",
+      "safety_note": "Loopback only.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/localhost-url.txt"
+      ]
+    },
+    {
+      "tool": "Whois",
+      "slug": "whois",
+      "category": "WHOIS lookup",
+      "fixture_mode": "manual_local_only",
+      "simple_test_scenario": "Use `ddt.test` for form validation; it is a reserved test domain and has no public registration record.",
+      "safety_note": "Do not query a third-party identity target.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/dns/dns-records.csv"
+      ]
+    },
+    {
+      "tool": "Wifite2",
+      "slug": "wifite2",
+      "category": "Wireless auditing",
+      "fixture_mode": "hardware_required",
+      "simple_test_scenario": "Help and UI validation only. Requires a dedicated authorised wireless lab and adapter.",
+      "safety_note": "No wireless attacks or handshake capture.",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": [
+        "common/targets/lab-targets.json"
+      ]
+    },
+    {
+      "tool": "WPScan",
+      "slug": "wpscan",
+      "category": "WordPress scanner",
+      "fixture_mode": "requires_wordpress_fixture",
+      "simple_test_scenario": "Use form validation only until a disposable local WordPress instance is separately provided.",
+      "safety_note": "The bundled static site is not WordPress; no external target. ",
+      "shared_fixtures": [
+        "common/targets/lab-targets.json",
+        "common/local-web/",
+        "common/wordlists/web-small.txt"
+      ],
+      "fixture_paths": []
+    }
+  ]
+}

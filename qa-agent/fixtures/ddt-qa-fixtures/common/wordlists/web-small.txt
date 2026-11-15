@@ -1,0 +1,9 @@
+/
+/health
+/about
+/contact
+/robots.txt
+/sitemap.xml
+/search
+/api/health
+/docs

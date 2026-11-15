@@ -1,0 +1,16 @@
+{
+  "tool": "DNSenum",
+  "slug": "dnsenum",
+  "category": "DNS enumeration",
+  "fixture_mode": "manual_local_dns",
+  "simple_test_scenario": "Use `ddt.test` for field validation; meaningful DNS enumeration requires a lab DNS zone configured by the user.",
+  "safety_note": "No external domain enumeration.",
+  "shared_fixtures": [
+    "common/targets/lab-targets.json",
+    "common/local-web/",
+    "common/wordlists/web-small.txt"
+  ],
+  "fixture_paths": [
+    "common/dns/example-zone.txt"
+  ]
+}
