@@ -1,0 +1,27 @@
+name: Temporary fixture audit export
+
+on:
+  push:
+    branches:
+      - analysis/fixture-audit-20261115
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract fixture rebuild input
+        run: |
+          mkdir -p /tmp/ddt-fixture-audit
+          tar -tzf ddt-fixture-rebuild-input.tar.gz >/tmp/ddt-fixture-audit/archive-list.txt
+          tar -xzf ddt-fixture-rebuild-input.tar.gz -C /tmp/ddt-fixture-audit
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ddt-fixture-audit-extracted
+          path: /tmp/ddt-fixture-audit/
+          if-no-files-found: error
+          retention-days: 1
